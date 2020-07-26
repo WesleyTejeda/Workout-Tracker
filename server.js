@@ -7,7 +7,11 @@ server.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 })
 
+//Static folder
+server.use(express.static("public"));
+
 //Import
-const db = require("./models");
+const path = require("path");
+const db = require("./models/workout-model");
 require("./routes/api-routes")(server);
 require("./routes/html-routes")(server);
