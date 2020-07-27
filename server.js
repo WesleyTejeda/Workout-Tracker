@@ -7,7 +7,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const mongojs = require("mongojs");
 require("dotenv").config();
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
 // server.use(logger("dev"));
 server.use(express.urlencoded({ extended: true }));
