@@ -4,16 +4,20 @@ const server = express();
 let  PORT = process.env.PORT || 8080;
 
 const logger = require("morgan");
-server.use(logger("dev"));
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutsdb", { useNewUrlParser: true });
+const mongojs = require("mongojs");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
+
+// server.use(logger("dev"));
+server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
 
 //Static folder
 server.use(express.static("public"));
 
 //Import
 const path = require("path");
-const db = require("./models/workout-model");
+const db = require("./models");
 require("./routes/api-routes")(server);
 require("./routes/html-routes")(server);
 
