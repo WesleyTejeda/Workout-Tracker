@@ -6,6 +6,7 @@ let  PORT = process.env.PORT || 8080;
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const mongojs = require("mongojs");
+require("dotenv").config();
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
 // server.use(logger("dev"));
