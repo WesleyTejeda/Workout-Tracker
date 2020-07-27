@@ -17,9 +17,7 @@ module.exports = function(server) {
 
     //Receive id of workout and updated data and return json
     server.put("/api/workouts/:id", (req, res) => {
-        console.log(req.params);
-        console.log(req.body);
-        db.Exercise.updateOne({_id: req.params.id}, {$push: req.body},{upsert: true}).then(() => db.Workout.findOneAndUpdate({}, { $push: { exercises: req.params.id } }, { new: true })).then(data => {
+        db.Exercise.create(req.body).then(({ _id }) => db.Workout.findOneAndUpdate({_id: req.params.id}, { $push: { exercises: _id } }, { new: true })).then(data => {
             res.json(data);
         }).catch(err => {
             res.send(err);
